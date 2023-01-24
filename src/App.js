@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import Citybar from "./Citybar";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
+  
+  const [ city, setCity ] = useState("turku");
+  const [ data, setData ] = useState({});
+
+  //tämän päivän päivämäärään lisätään tunnit -> löydetään indeksi säälle
+
+  let timeNow = new Date();
+  let day = timeNow.getDate();
+  let hours = timeNow.getHours();
+
+
+  console.log(timeNow);
+  console.log(day);
+  console.log(hours);
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=60.45&longitude=22.27&hourly=temperature_2m`;
+
+  useEffect(() => {
+    axios
+    .get(url)
+    .then(res => {
+      console.log(res.data.hourly.temperature_2m[10]);
+      setData(res.data);
+    });
+  }, [city]);
+  console.log(data);
+  
+
+  const changeCity = (e) => {
+    e.preventDefault();
+    setCity(e.target.value);
+    console.log(city);
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Weather App</h1>
+      <Citybar setCity={ changeCity }/>
     </div>
   );
 }
