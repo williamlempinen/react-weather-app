@@ -6,7 +6,11 @@ const Citybar = (props) => {
                 <button onClick={ props.setCity } value={ "tampere" }>Tampere</button>
                 <button onClick={ props.setCity } value={ "helsinki" }>Helsinki</button>
                 <button onClick={ props.setCity } value={ "turku" }>Turku</button>
-                <button onClick={ props.setContent }>Show weather for the next three days</button>
+                <button onClick={ props.setContent } value={ props.multiple }>
+                    {props.multiple
+                    ? "1 day"
+                    : "3 days"}
+                </button>
             </div>
         </div>
     );

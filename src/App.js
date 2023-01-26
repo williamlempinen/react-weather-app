@@ -1,6 +1,5 @@
 import Citybar from "./Citybar";
 import { useEffect, useState } from "react";
-import Icon from "./Icon";
 import axios from "axios";
 
 //*Helsinki cordinates
@@ -60,11 +59,26 @@ const TA_EA = 23.80;
     return sum/lista.length;
   }
 
+  const listOfIcons = {
+    0: <i className="fa-solid fa-sun"></i>, //*0, clear sky
+    1: <i className="fa-solid fa-cloud-sun"></i>, //*1-3, mainly clear
+    45: <i className="fa-solid fa-cloud"></i>, //*45-48, cloudy
+    51: <i className="fa-solid fa-cloud-rain"></i>, //*51-67, rain
+    71: <i className="fa-solid fa-snowflake"></i>, //* 71-77, snow
+    80: <i className="fa-solid fa-cloud-showers-water"></i>, //* 80-86, rain showers
+    95: <i className="fa-solid fa-cloud-bolt"></i>, //*95-99, thunderstorm
+    100: <i className="fa-solid fa-bug"></i> //*bug
+  };
+
 //!tehtävä torstaina!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //TODO googleFontsien lisääminen
 
 //TODO tarkista herokuun pushaamminen
+
+//TODO weathercoden perustaalle näytetään sanallinen kuvaus säästä
+
+//TODO yritä korjata useEffect
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -86,27 +100,16 @@ function App() {
   //! API SETUP: Hourly weather variables: [temperature (2m)], Daily weather variables: [weathercode], Settings: timezone == europe/berlin. Else is default
   const URL = `https://api.open-meteo.com/v1/forecast?latitude=${north}&longitude=${east}&hourly=temperature_2m&daily=weathercode&timezone=Europe%2FBerlin`;
 
-
-
-
-
   //*useEffect for fetching data
   //?not working correctly
   useEffect(() => {
     console.log("effect");
-    async function getData() {
-      const response = await fetch(URL);
-      const data = await response.json();
-
-      setTempData(data.hourly.temperature_2m);
-      setWeathercode(data.daily.weathercode);
-
-      console.log(data);
-      console.log(weathercode[0]);
-    }
-
-    console.log("seuraavaksi kutsutaan getdata");
-    getData();
+    axios
+    .get(URL)
+    .then(response => {
+      setTempData(response.data.hourly.temperature_2m);
+      setWeathercode(response.data.daily.weathercode);
+    })
   }, [city, north, east, URL, multiple]);
 
 
@@ -114,7 +117,6 @@ function App() {
 //*on button click, change state
 //?not working correctly, button needs to be pressed twice to change displayed data
   const changeCity = (e) => {
-    e.preventDefault();
     setCity(e.target.value);
     if (city === "turku") {
       setNorth(TU_NO);
@@ -122,7 +124,7 @@ function App() {
     } else if (city === "tampere") {
       setNorth(TA_NO);
       setEast(TA_EA);
-    } else {
+    } else if (city === "helsinki") {
       setNorth(HEL_NO);
       setEast(HEL_EA);
     }
@@ -132,16 +134,25 @@ function App() {
   }
 
   console.log(multiple);
+  console.log(weathercode[0]);
+  
+  if (weathercode) {
+    const weatherKey = weathercode[0];
+    console.log(typeof weatherKey);
+    console.log(listOfIcons.weatherKey);
+  }
+  
+  
 
-
-  //*LONG return
+  //*return
   return (
     <div className="App">
       <h1>Weather App</h1>
 
       <Citybar 
       setCity={ changeCity }
-      setContent={() => !multiple ? setMultiple(true) : setMultiple(false) }/>
+      setContent={() => !multiple ? setMultiple(true) : setMultiple(false) }
+      multiple={ multiple }/>
 
       <div className="content">
         <h3>{ city.toLocaleUpperCase() }</h3>
@@ -168,7 +179,8 @@ function App() {
           <div className="one-day">
             <p>{ weathercode[0] }</p>
             
-            <Icon code={ weathercode } />
+            {weathercode && 
+            <p>{ listOfIcons.weatherKey }</p> }
             
             <p>{ Math.round(tempData[hour]) }℃</p>
             </div>
