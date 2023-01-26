@@ -31,3 +31,16 @@ button {
   background-color: blanchedalmond;
 }
 
+.one-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#icon {
+  font-size: 7rem;
+}
+
+.three-days {
+  text-align: center;
+}
