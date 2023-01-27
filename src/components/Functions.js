@@ -1,7 +1,6 @@
 //* functions to find the average temperature for three-day display
 function setAVGToday(list) {
     let listt = list.slice(0, 24);
-    console.log(listt);
     let sum = 0; 
     for (let i = 0; i < listt.length; i++) {
       sum += listt[i];
@@ -10,7 +9,6 @@ function setAVGToday(list) {
   }
   function setAVGTomorrow(list) {
     let listS = list.slice(24,48);
-    console.log(listS);
     let sum = 0; 
     for (let i = 0; i < listS.length; i++) {
       sum += listS[i];
@@ -19,7 +17,6 @@ function setAVGToday(list) {
   }
   function setAVGDayAfterTomorrow(list) {
     let lista = list.slice(48,72);
-    console.log(lista);
     let sum = 0; 
     for (let i = 0; i < lista.length; i++) {
       sum += lista[i];

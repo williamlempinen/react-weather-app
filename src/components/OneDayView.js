@@ -1,4 +1,4 @@
-import { findIndex } from "./components/Functions";
+import { findIndex } from "./Functions";
 
 const OneDayView = (props) => {
     return (
@@ -9,7 +9,7 @@ const OneDayView = (props) => {
               <p className="icon-one">{ props.listOfIcons[findIndex(props.weatherKey1)] }</p>
               <p className="description-one">{ props.listOfDescriptions[findIndex(props.weatherKey1)] }</p>
             </div>
-            <p className="temperature">{ Math.round(props.tempData[hour]) }℃</p>
+            <p className="temperature">{ Math.round(props.tempData[props.hour]) }℃</p>
             </div>
         </div>
     );
