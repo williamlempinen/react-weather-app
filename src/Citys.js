@@ -1,4 +1,4 @@
-const Citybar = (props) => {
+const Citys = (props) => {
     return (
         <div>
             <h2>Select city</h2>
@@ -16,4 +16,4 @@ const Citybar = (props) => {
     );
 }
 
-export default Citybar;
+export default Citys;

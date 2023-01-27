@@ -12,6 +12,7 @@ h2 {
 
 h3 {
   text-align: center;
+  font-size: 3rem;
 }
 
 h5 {
@@ -38,12 +39,35 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 3rem;
 }
 
-#icon {
+.icon-one {
   font-size: 7rem;
+  text-align: center;
+}
+
+.description-one {
+  font-size: 4rem;
+  text-align: center;
 }
 
 .three-days {
   text-align: center;
+}
+
+.temperature {
+  font-size: 3rem;
+  text-align: center;
+  margin: none;
+  padding: none;
+}
+
+footer {
+  text-align: center;
+}
+
+.item {
+  margin: 10px;
+  font-size: 2rem;
 }
