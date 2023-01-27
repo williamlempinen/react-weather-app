@@ -5,13 +5,13 @@ import Footer from "./components/Footer";
 import ThreeDayView from "./components/ThreeDayView";
 import OneDayView from "./components/OneDayView";
 
-//*Helsinki cordinates
+//*Helsinki coordinates
 const HEL_EA = 60.17;
 const HEL_NO = 24.95;
-//*Turku cordinates
+//*Turku coordinates
 const TU_EA = 60.45;
 const TU_NO = 22.28;
-//*Tampere cordinates
+//*Tampere coordinates
 const TA_EA = 61.50;
 const TA_NO = 23.80;
 
