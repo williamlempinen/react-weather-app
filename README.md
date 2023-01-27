@@ -1,3 +1,10 @@
+Weather app using open API - open-meteo. Made with using React.
+
+App displays the current weather of the cities Tampere, Helsinki and Turku. Also you can toggle to view three day weather or one day weather.
+
+PROBLEMS: When changeing cities, the weather data doesn't come after one click (needs to be double clicked). This is an error that I could not solve.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
