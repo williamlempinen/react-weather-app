@@ -1,66 +1,110 @@
+:root {
+  --main-color: #393E46;
+  --secondary1-color: #E5E0FF;
+  --secondary2-color: #7cecc7;
+  --secondary3-color: #76b6ffc7;
+
+  --sun-color: #FFEA20;
+  --cloud-color: #DDDDDD;
+  --rain-color: #5BC0F8;
+  --snow-color: #FFFBF5;
+} 
+
+body {
+  background-color: var(--main-color);
+  font-family: 'Exo 2', sans-serif;
+  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  font-family: 'Righteous', cursive;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+
 h1 {
   text-align: center;
-  font-size: 40px;
-  background-color: gray;
+  font-size: 2.4rem;
+  color: var(--secondary2-color);
 }
 
 h2 {
-  font-size: 25px;
+  font-size: 1.4rem;
   text-align: center;
-  background-color: #108989;
+  color: var(--secondary1-color)
 }
 
 h3 {
   text-align: center;
-  font-size: 3rem;
+  font-size: 2rem;
+  color: var(--secondary1-color);
 }
 
 h5 {
   text-align: center;
+  font-size: 1.2rem;
+  color: var(--secondary2-color);
 }
 
 .buttons {
   text-align: center;
-  background-color: beige;
 }
 
 button {
+  font-size: 1.4rem;
+  font-weight: 500;
   margin: 10px;
-  color: #108989;
-  background-color: blanchedalmond;
+  color: var(--secondary2-color);
+  background-color: var(--main-color);
   border-radius: 10px;
-}
-
-.content {
-  background-color: blanchedalmond;
+  border-left: 1px;
+  border-right: 1px;
+  border-width: 1px;
+  border-color: var(--secondary2-color);
 }
 
 .one-day {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 3rem;
 }
 
 .icon-one {
-  font-size: 7rem;
+  font-size: 5rem;
   text-align: center;
 }
 
 .description-one {
-  font-size: 4rem;
+  font-size: 1.4rem;
+  font-weight: 600;
   text-align: center;
+  color: var(--secondary1-color);
+}
+
+.temperature {
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--secondary1-color);
 }
 
 .three-days {
   text-align: center;
 }
 
-.temperature {
-  font-size: 3rem;
-  text-align: center;
-  margin: none;
-  padding: none;
+.avg-temp {
+  font-size: 1.4rem;
+  color: var(--secondary1-color);
+}
+
+.three-date {
+  color: var(--secondary3-color);
+}
+
+.three-icon {
+  font-size: 2rem;
+}
+
+.description-three {
+  color: var(--secondary2-color);
 }
 
 footer {
@@ -70,4 +114,26 @@ footer {
 .item {
   margin: 10px;
   font-size: 2rem;
+  color: var(--secondary2-color);
+}
+
+.author {
+  color: var(--secondary3-color);
+  font-weight: 500;
+}
+
+.sun {
+  color: var(--sun-color);
+}
+
+.cloud {
+  color: var(--cloud-color);
+}
+
+.rain {
+  color: var(--rain-color);
+}
+
+.snow {
+  color: var(--snow-color);
 }

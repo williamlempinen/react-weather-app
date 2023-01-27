@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Citys from "./Citys";
-import Footer from "./Footer";
+import Citys from "./components/Citys";
+import Footer from "./components/Footer";
+import {
+        setAVGToday,
+        setAVGTomorrow,
+        setAVGDayAfterTomorrow,
+        findIndex
+        } from "./components/Functions";
 
 //*Helsinki cordinates
 const HEL_EA = 60.17;
@@ -28,44 +34,14 @@ let dayAfterTomorrowdate = dayAfterTomorrow.toISOString().slice(0, 10);
 //*get current hour value from the Date object
 let hour = today.getHours();
 
-
-//* functions to find the average temperature for three-day display
-function setAVGToday(list) {
-  let listt = list.slice(0, 24);
-  console.log(listt);
-  let sum = 0; 
-  for (let i = 0; i < listt.length; i++) {
-    sum += listt[i];
-  }
-  return sum/listt.length;
-}
-function setAVGTomorrow(list) {
-  let listS = list.slice(24,48);
-  console.log(listS);
-  let sum = 0; 
-  for (let i = 0; i < listS.length; i++) {
-    sum += listS[i];
-  }
-  return sum/listS.length;
-}
-function setAVGDayAfterTomorrow(list) {
-  let lista = list.slice(48,72);
-  console.log(lista);
-  let sum = 0; 
-  for (let i = 0; i < lista.length; i++) {
-    sum += lista[i];
-  }
-  return sum/lista.length;
-}
-
-//*wanted to be an object, didn't get to work
+//*wanted to be an object, didn't get to work so list
 const listOfIcons = [
-  <i className="fa-solid fa-sun"></i>, //*0, clear sky
-  <i className="fa-solid fa-cloud-sun"></i>, //*1-3, mainly clear
-  <i className="fa-solid fa-cloud"></i>, //*45-48, cloudy
-  <i className="fa-solid fa-cloud-rain"></i>, //*51-67, rain
-  <i className="fa-solid fa-snowflake"></i>, //* 71-77, snow
-  <i className="fa-solid fa-cloud-showers-water"></i>, //* 80-86, rain showers
+  <i className="sun fa-solid fa-sun"></i>, //*0, clear sky
+  <i className="cloud fa-solid fa-cloud-sun"></i>, //*1-3, mainly clear
+  <i className="cloud fa-solid fa-cloud"></i>, //*45-48, cloudy
+  <i className="rain fa-solid fa-cloud-rain"></i>, //*51-67, rain
+  <i className="snow fa-solid fa-snowflake"></i>, //* 71-77, snow
+  <i className="rain fa-solid fa-cloud-showers-water"></i>, //* 80-86, rain showers
   <i className="fa-solid fa-cloud-bolt"></i>, //*95-99, thunderstorm
 ];
 
@@ -80,26 +56,7 @@ const listOfDescriptions = [
   "Thunderstrom"
 ];
 
-//*function to find correct icon and description
-let listIndex;
-function findIndex(key) {
-  if ( key === 0 ) {
-    listIndex = 0;
-  } else if ( key <= 5 && key > 0 ) {
-    listIndex = 1;
-  } else if ( key >= 45 && key <= 48 ) {
-    listIndex = 2;
-  } else if ( key >= 51 && key <= 67 ) {
-    listIndex = 3;
-  } else if ( key >= 71 && key <= 77 ) {
-    listIndex = 4;
-  } else if ( key >= 80 && key <= 86 ) {
-    listIndex = 5;
-  } else if ( key >= 95 && key <= 99 ) {
-    listIndex = 6;
-  }
-  return listIndex;
-}
+
 
 
 //!tehtävä perjantaina!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -141,9 +98,6 @@ function App() {
   const weatherKey2 = weathercode[1];
   const weatherKey3 = weathercode[2];
   console.log(weatherKey1, weatherKey2, weatherKey3);
-
-  console.log(listIndex);
-
 
   //! API SETUP: Hourly weather variables: [temperature (2m)], Daily weather variables: [weathercode], Settings: timezone == europe/berlin. Else is default
   const URL = `https://api.open-meteo.com/v1/forecast?latitude=${east}&longitude=${north}&hourly=temperature_2m&daily=weathercode&timezone=Europe%2FBerlin`;
@@ -201,20 +155,20 @@ function App() {
         {multiple
         ?
         <div className="three-days">
-          <h2>{ todaydate }</h2>
-          <p>Average temperature { Math.round(setAVGToday(tempData)) }℃</p>
-          <p>{ listOfIcons[findIndex(weatherKey1)] }</p>
-          <p>{ listOfDescriptions[findIndex(weatherKey1)] }</p>
+          <h2 className="three-date">{ todaydate }</h2>
+          <p className="avg-temp">Average temperature { Math.round(setAVGToday(tempData)) }℃</p>
+          <p className="three-icon">{ listOfIcons[findIndex(weatherKey1)] }</p>
+          <p className="description-three">{ listOfDescriptions[findIndex(weatherKey1)] }</p>
 
-          <h2>{ tomorrowdate }</h2>
-          <p>Average temperature { Math.round(setAVGTomorrow(tempData)) }℃</p>
-          <p>{ listOfIcons[findIndex(weatherKey2)] }</p>
-          <p>{ listOfDescriptions[findIndex(weatherKey2)] }</p>
+          <h2 className="three-date">{ tomorrowdate }</h2>
+          <p className="avg-temp">Average temperature { Math.round(setAVGTomorrow(tempData)) }℃</p>
+          <p className="three-icon">{ listOfIcons[findIndex(weatherKey2)] }</p>
+          <p className="description-three">{ listOfDescriptions[findIndex(weatherKey2)] }</p>
 
-          <h2>{ dayAfterTomorrowdate }</h2>
-          <p>Average temperature { Math.round(setAVGDayAfterTomorrow(tempData)) }℃</p>
-          <p>{ listOfIcons[findIndex(weatherKey3)] }</p>
-          <p>{ listOfDescriptions[findIndex(weatherKey3)] }</p>
+          <h2 className="three-date">{ dayAfterTomorrowdate }</h2>
+          <p className="avg-temp">Average temperature { Math.round(setAVGDayAfterTomorrow(tempData)) }℃</p>
+          <p className="three-icon">{ listOfIcons[findIndex(weatherKey3)] }</p>
+          <p className="description-three">{ listOfDescriptions[findIndex(weatherKey3)] }</p>
         </div>
         :
         <div>
