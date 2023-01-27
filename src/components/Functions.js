@@ -1,4 +1,4 @@
-//* functions to find the average temperature for three-day display
+//* functions to find the average temperature for ThreeDayView
 function setAVGToday(list) {
     let listt = list.slice(0, 24);
     let sum = 0; 
