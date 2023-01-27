@@ -1,6 +1,7 @@
 Weather app using open API - open-meteo. Made with using React.
 
 App displays the current weather of the cities Tampere, Helsinki and Turku. Also you can toggle to view three day weather or one day weather.
+My app is deployed into Heroku, https://react-weather-app.herokuapp.com/
 
 PROBLEMS: When changeing cities, the weather data doesn't come after one click (needs to be double clicked). This is an error that I could not solve.
 
