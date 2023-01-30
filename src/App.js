@@ -100,6 +100,7 @@ function App() {
       setNorth(HEL_NO);
       setEast(HEL_EA);
     }
+    
     setCity(e.target.value);
   }
 
