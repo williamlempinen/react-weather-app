@@ -74,7 +74,6 @@ function App() {
   const URL = `https://api.open-meteo.com/v1/forecast?latitude=${east}&longitude=${north}&hourly=temperature_2m&daily=weathercode&timezone=Europe%2FBerlin`;
 
   //*useEffect for fetching data
-  //?not working correctly
   useEffect(() => {
     axios
     .get(URL)
@@ -89,19 +88,19 @@ function App() {
 
 
 //*on button click, change city value
-//?not working correctly, button needs to be pressed twice to change displayed data
   const changeCity = (e) => {
-    setCity(e.target.value);
-    if (city === "turku") {
+    e.preventDefault();
+    if (e.target.value === "turku") {
       setNorth(TU_NO);
       setEast(TU_EA);
-    } else if (city === "tampere") {
+    } else if (e.target.value === "tampere") {
       setNorth(TA_NO);
       setEast(TA_EA);
-    } else if (city === "helsinki") {
+    } else if (e.target.value === "helsinki") {
       setNorth(HEL_NO);
       setEast(HEL_EA);
     }
+    setCity(e.target.value);
   }
 
   //*return
